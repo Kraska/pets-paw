@@ -1,11 +1,10 @@
+import { MainPage } from 'pages/MainPage';
 import './App.css';
 
+
 function App() {
-  return (
-    <div className="text-3xl font-bold underline">
-      Hello!
-    </div>
-  );
-}
+  return <MainPage />
+} 
+
 
 export default App;

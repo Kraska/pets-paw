@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+
+    .MainMenu {
+        @apply flex justify-between;
+    }
+
+    .MainMenuItem .Img {
+        border: 4px solid rgba(255, 255, 255, 0.6);
+        @apply rounded-lg h-[198px] w-[153px] flex justify-center items-center border-4
+        hover:border-white active:border-[#FBE0DC];
+    }
+
+    .MainMenuItem .Vote {
+        @apply bg-[#B4B7FF];
+    }
+
+    .MainMenuItem .Breeds {
+        @apply bg-[#97EAB9];
+    }
+
+    .MainMenuItem .Search {
+        @apply bg-[#FFD280];
+    }
+
+    .MainMenu .Label {
+        @apply uppercase w-full rounded-lg bg-white text-[#FF868E] flex justify-center p-2.5 my-2.5
+        hover:bg-[#FBE0DC] active:bg-[#FF868E] active:text-white;
+    }
+}
