@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+
+
+    .IconBtnGroup button.IconBtn {
+        @apply border-2 border-white;
+    }
+
+    .IconBtnGroup button.IconBtn {
+        @apply rounded-none;
+    }
+
+    .IconBtnGroup div:first-child button.IconBtn-md,
+    .IconBtnGroup div:first-child button.IconBtn-lg {
+        @apply rounded-l-lg;
+    }
+    .IconBtnGroup div:last-child button.IconBtn-md,
+    .IconBtnGroup div:last-child button.IconBtn-lg {
+        @apply rounded-r-lg;
+    }
+
+    .IconBtnGroup div:first-child button.IconBtn-sm {
+        @apply rounded-l-md;
+    }
+    .IconBtnGroup div:last-child button.IconBtn-sm {
+        @apply rounded-r-md;
+    }
+}

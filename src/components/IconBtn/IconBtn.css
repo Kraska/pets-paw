@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+
+    button.IconBtn {
+        @apply focus:outline-none flex justify-center items-center;
+    }
+
+    button.IconBtn-sm {
+        @apply rounded-md h-[40px] w-[40px] ;
+    }
+
+    button.IconBtn-sm svg {
+        @apply h-[20px];
+    }
+
+    button.IconBtn-md {
+        @apply rounded-lg h-[60px] w-[60px] ;
+    }
+
+    button.IconBtn-lg {
+        @apply rounded-lg h-[80px] w-[80px] ;
+    }
+/* 
+    button.IconBtn-md svg {
+        @apply h-[30px] ;
+    } */
+
+    button.IconBtn-white {
+        @apply bg-white hover:bg-pink-light active:bg-pink;
+    }
+
+    button.IconBtn-white svg,
+    button.IconBtn-pink-light svg {
+        @apply  fill-pink group-active:fill-white;
+    }
+    button.IconBtn-pink-light {
+        @apply bg-pink-light;
+    }
+
+    button.IconBtn-pink {
+        @apply bg-pink hover:bg-pink/30;
+    }
+    button.IconBtn-pink svg {
+        @apply fill-white group-hover:fill-pink;
+    }
+
+    button.IconBtn-green {
+        @apply bg-green hover:bg-green/30;
+    }
+    button.IconBtn-green svg {
+        @apply fill-white group-hover:fill-green;
+    }
+
+    button.IconBtn-yellow {
+        @apply bg-yellow hover:bg-yellow/30;
+    }
+    button.IconBtn-yellow svg {
+        @apply fill-white group-hover:fill-yellow;
+    }
+}
