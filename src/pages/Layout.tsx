@@ -8,7 +8,7 @@ type LayoutProps = {
 
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
     return (
-        <section className="flex h-full w-full bg-[#F8F8F7]">
+        <section className="flex min-h-screen w-full bg-[#F8F8F7]">
           
           <section className="w-full lg:w-1/2 flex justify-center">
             <div className='w-[500px] pt-9'>
@@ -22,7 +22,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
             </div>
           </section>
           
-          <section className="w-full lg:w-1/2">{children}</section>  
+          <section className="w-full lg:w-1/2 py-[30px] pr-[30px]">{children}</section>  
         </section>
     )
 }
