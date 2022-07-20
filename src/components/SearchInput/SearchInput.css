@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+
+    .SearchInput input {
+        @apply h-[60px] w-full rounded-lg px-[20px] text-text text-lg placeholder:text-text-light
+        hover:border-2 hover:border-pink-light
+        focus:border-2 focus:border-pink focus:ring-0 focus:outline-none;
+    }
+
+    .SearchInput button {
+        @apply absolute right-[20px] top-[10px] bg-pink-light p-[10px] rounded-md focus:outline-none;
+    }
+}
