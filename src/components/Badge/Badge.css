@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+
+    .Badge {
+        @apply p-3 rounded-md flex justify-center items-center;
+    }
+
+    .Badge-white {
+        @apply bg-white text-pink hover:bg-pink-light active:bg-pink active:text-white;
+    }
+}

@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .PhotoGrid {
+        @apply  grid grid-cols-3 gap-4 auto-rows-[minmax(140px,1fr)];
+    }
+
+    .PhotoGridItem img {
+        @apply w-full h-full object-cover rounded-md;
+    }
+
+    .PhotoGridItem {
+        @apply relative;
+    }
+    .PhotoGridItemHover {
+        @apply hidden absolute top-0 bottom-0 left-0 right-0 justify-center items-center bg-pink/60 rounded-md;
+    }
+    .PhotoGridItem:hover div.PhotoGridItemHover {
+        @apply flex;
+    } 
+
+    .PhotoGridItem:nth-child(10n - 9),
+    .PhotoGridItem:nth-child(10n - 2) {
+        @apply row-span-2;
+    }
+    .PhotoGridItem:nth-child(10n - 6),
+    .PhotoGridItem:nth-child(10n - 1) {
+        @apply row-span-2 col-span-2;
+    }
+}
