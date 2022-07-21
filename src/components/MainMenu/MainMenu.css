@@ -25,9 +25,4 @@
     .MainMenuItem .Search {
         @apply bg-[#FFD280];
     }
-
-    .MainMenu .Label {
-        @apply uppercase w-full rounded-lg bg-white text-[#FF868E] flex justify-center p-2.5 my-2.5
-        hover:bg-[#FBE0DC] active:bg-[#FF868E] active:text-white;
-    }
 }

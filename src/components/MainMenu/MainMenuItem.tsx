@@ -1,3 +1,4 @@
+import { Badge } from "components/Badge/Badge";
 import React from "react";
 import './MainMenu.css';
 
@@ -14,6 +15,6 @@ export const MainMenuItem: React.FC<MainMenuItemProps> = ({ type, title, imgSrc,
         <div className={`Img ${type}`}>
             <img alt={title} src={imgSrc} />
         </div>
-        <div className="Label">{title}</div>
+        <Badge className="my-2.5 uppercase" title={title} />
     </div>;
 }
