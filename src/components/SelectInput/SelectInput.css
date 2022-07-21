@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+
+    .SelectInput {
+        @apply relative after:content-["\2304"] after:text-2xl after:absolute after:-top-1 after:right-3 after:text-text-light;
+    }
+
+    .SelectInput select {
+        @apply w-full h-[40px] bg-background rounded-md p-2 pr-7 text-text-light appearance-none
+            border border-transparent
+            hover:border-pink focus:outline-none;
+    }
+}
