@@ -4,13 +4,25 @@
 
 @layer components {
 
-    .SelectInput {
+    .SelectInput div {
         @apply relative after:content-["\2304"] after:text-2xl after:absolute after:-top-1 after:right-3 after:text-text-light;
     }
 
     .SelectInput select {
-        @apply w-full h-[40px] bg-background rounded-md p-2 pr-7 text-text-light appearance-none
-            border border-transparent
-            hover:border-pink focus:outline-none;
+        @apply w-full h-[40px] rounded-md p-2 pr-7 appearance-none
+            border-2 border-transparent
+            hover:border-pink-light focus:outline-none;
+    }
+
+    .SelectInput-grey select {
+        @apply bg-background text-text-light;
+    }
+
+    .SelectInput-white select {
+        @apply bg-white text-text; 
+    }
+
+    .SelectInput label {
+        @apply text-xs text-text-light ml-2.5;
     }
 }

@@ -9,9 +9,11 @@ export type SelectInputOption = {
 type SelectInputColor = 'white' | 'grey'
 
 type SelectInputProps = {
+    name: string,
     items: SelectInputOption[],
     className?: string,
     color?: SelectInputColor,
+    label?: string,
 }
 
 const colorClassMap: Record<SelectInputColor, string> = {
@@ -19,11 +21,15 @@ const colorClassMap: Record<SelectInputColor, string> = {
     grey: 'SelectInput-grey',
 }
 
-export const SelectInput: React.FC<SelectInputProps> = ({ items, className, color = 'white' }) => {
+export const SelectInput: React.FC<SelectInputProps> = 
+    ({ name, items, className, color = 'white', label }) => {
 
     return <div className={`SelectInput ${className} ${colorClassMap[color]}`}>
-        <select>
-            {items.map(({ key, value }) => (<option key={key}>{value}</option>))}
-        </select>
+        {label && <label htmlFor={name}>{label}</label>}
+        <div>
+            <select name={name}>
+                {items.map(({ key, value }) => (<option key={key}>{value}</option>))}
+            </select>
+        </div>
     </div>
 }
