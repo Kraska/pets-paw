@@ -36,28 +36,38 @@
     button.IconBtn-pink-light svg {
         @apply  fill-pink group-active:fill-white;
     }
+    button.IconBtn-white:active svg,
+    button.IconBtn-pink-light:active svg {
+        @apply fill-white;
+    }
     button.IconBtn-pink-light {
         @apply bg-pink-light;
     }
 
+    button.IconBtn-pink svg,
+    button.IconBtn-green svg,
+    button.IconBtn-yellow svg {
+        @apply fill-white;
+    }
+    
     button.IconBtn-pink {
         @apply bg-pink hover:bg-pink/30;
     }
-    button.IconBtn-pink svg {
-        @apply fill-white group-hover:fill-pink;
+    button.IconBtn-pink:hover svg {
+        @apply fill-pink;
     }
 
     button.IconBtn-green {
         @apply bg-green hover:bg-green/30;
     }
-    button.IconBtn-green svg {
-        @apply fill-white group-hover:fill-green;
+    button.IconBtn-green:hover svg {
+        @apply fill-green;
     }
 
     button.IconBtn-yellow {
         @apply bg-yellow hover:bg-yellow/30;
     }
-    button.IconBtn-yellow svg {
-        @apply fill-white group-hover:fill-yellow;
+    button.IconBtn-yellow:hover svg {
+        @apply fill-yellow;
     }
 }

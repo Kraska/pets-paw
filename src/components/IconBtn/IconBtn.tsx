@@ -5,17 +5,19 @@ import { ReactComponent as Heart } from 'assets/icons/heart.svg';
 import { ReactComponent as Back } from 'assets/icons/back.svg';
 import { ReactComponent as Search } from 'assets/icons/Search.svg';
 import { ReactComponent as Close } from 'assets/icons/close.svg';
+import { ReactComponent as Update } from 'assets/icons/update.svg';
 import { ReactComponent as HeartFull } from 'assets/icons/heart-full.svg';
 import './IconBtn.css';
 
-type IconType = 'smile' | 'sad' | 'heart' | 'back' | 'search' | 'close' | 'heart-full';
+type IconType = 'smile' | 'sad' | 'heart' | 'back' | 'search' | 'close' | 'heart-full' | 'update';
 type IconSize = 'sm' | 'md' | 'lg';
 type IconColor = 'white' | 'pink-light' | 'pink' | 'green' | 'yellow';
 
 type IconBtnProps = {
     type: IconType,
     size?: IconSize,
-    color?: IconColor
+    color?: IconColor,
+    className?: string,
 }
 
 const iconMap: Record<IconType, ReactElement> = {
@@ -26,6 +28,7 @@ const iconMap: Record<IconType, ReactElement> = {
     search: <Search />,
     close: <Close />,
     'heart-full': <HeartFull />,
+    update: <Update />
 }
 
 const sizeClassMap: Record<IconSize, string> = {
@@ -42,11 +45,9 @@ const colorClassMap: Record<IconColor, string> = {
     yellow: 'IconBtn-yellow',
 }
 
-export const IconBtn: React.FC<IconBtnProps> = ({ type, size = 'md', color = 'white' }) => {
-    const className = `IconBtn ${sizeClassMap[size]} ${colorClassMap[color]}`;
-    return <div className="group">
-            <button className={className} type="submit">{iconMap[type]}</button>
-        </div>
+export const IconBtn: React.FC<IconBtnProps> = ({ type, size = 'md', color = 'white', className }) => {
+    className = `IconBtn ${sizeClassMap[size]} ${colorClassMap[color]} ${className}`;
+    return <button className={className} type="submit">{iconMap[type]}</button>;
 }
 
 

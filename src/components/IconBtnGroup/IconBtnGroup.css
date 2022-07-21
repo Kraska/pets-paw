@@ -13,19 +13,12 @@
         @apply rounded-none;
     }
 
-    .IconBtnGroup div:first-child button.IconBtn-md,
-    .IconBtnGroup div:first-child button.IconBtn-lg {
-        @apply rounded-l-lg;
-    }
-    .IconBtnGroup div:last-child button.IconBtn-md,
-    .IconBtnGroup div:last-child button.IconBtn-lg {
-        @apply rounded-r-lg;
+    .IconBtnGroup button.IconBtn-md,
+    .IconBtnGroup button.IconBtn-lg {
+        @apply first:rounded-l-lg last:rounded-r-lg;
     }
 
-    .IconBtnGroup div:first-child button.IconBtn-sm {
-        @apply rounded-l-md;
-    }
-    .IconBtnGroup div:last-child button.IconBtn-sm {
-        @apply rounded-r-md;
+    .IconBtnGroup button.IconBtn-sm {
+        @apply first:rounded-l-md last:rounded-r-md;
     }
 }
