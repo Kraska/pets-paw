@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .Button {
+        @apply px-5 h-[40px] rounded-md flex items-center;
+    }
+
+    .Button-pink-light {
+        @apply bg-pink-light text-pink hover:bg-pink hover:text-white;
+    }
+    .Button-pink-light svg {
+        @apply fill-pink;
+    }    
+    .Button-pink-light:hover svg {
+        @apply fill-white;
+    }
+
+    .Button-pink {
+        @apply bg-pink text-white hover:bg-pink-light hover:text-pink;
+    }
+    .Button-pink svg {
+        @apply fill-white;
+    }    
+    .Button-pink:hover svg {
+        @apply fill-pink;
+    }
+
+    .Button-grey {
+        @apply bg-background text-text-light;
+    }
+    .Button-grey svg {
+        @apply fill-text-light;
+    }    
+    
+}
