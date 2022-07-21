@@ -4,14 +4,11 @@
 
 @layer components {
     .SortBtn {
-        @apply p-2.5 bg-background h-[40px] w-[40px] rounded-md border border-transparent hover:border-pink;
+        @apply p-2.5 bg-background h-[40px] w-[40px] rounded-md border-2 border-transparent hover:border-pink-light;
     }
 
     .SortBtn svg {
         @apply fill-text-light hover:fill-pink;
     }
 
-    .SortBtn:hover svg {
-        @apply fill-pink;
-    }
 }

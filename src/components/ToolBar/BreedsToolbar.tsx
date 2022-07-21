@@ -25,8 +25,8 @@ const limitOptions: SelectInputOption[] = [
 
 export const BreedsToolbar: React.FC<BreedsToolbarProps> = ({ className }) => {
     return <div className={`BreedsToolbar ${className} flex gap-4`}>
-        <SelectInput className="grow" items={breedsOptions} />
-        <SelectInput items={limitOptions} />
+        <SelectInput name='breed' color='grey' className="grow" items={breedsOptions} />
+        <SelectInput name='limit' color='grey' items={limitOptions} />
         <SortBtn type="up" />
         <SortBtn type="down" />
     </div>

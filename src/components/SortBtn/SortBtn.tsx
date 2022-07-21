@@ -7,7 +7,7 @@ type SortBtnProps = {
     className?: string,
 }
 
-export const SortBtn:React.FC<SortBtnProps> = ({ type, className }) => {
+export const SortBtn:React.FC<SortBtnProps> = ({ type, className = '' }) => {
     return <button className={`SortBtn ${className}`} type="submit">
         {type === 'up' ? <SortUp /> : <SortDown />}
     </button>
