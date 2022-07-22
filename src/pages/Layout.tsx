@@ -1,5 +1,6 @@
 import { MainMenu } from 'components/MainMenu/MainMenu';
 import { Logo } from 'components/Logo/Logo';
+import { ToolBar } from 'components/ToolBar/ToolBar';
 
 
 type LayoutProps = {
@@ -25,4 +26,14 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
           <section className="w-full lg:w-1/2 py-[30px] pr-[30px]">{children}</section>  
         </section>
     )
+}
+
+
+export const RightSideLayout: React.FC<LayoutProps> = ({ children }) => {
+  return <>
+      <ToolBar />
+      <div className="bg-white rounded-lg w-full my-2.5 p-5">
+        {children}
+      </div>
+    </>
 }

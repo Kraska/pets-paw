@@ -2,7 +2,7 @@ import RighsideImg from 'assets/images/girl-and-pet 1.png'
 import { Layout } from './Layout';
 
 
-export const MainPage = () => {
+export const HomePage = () => {
     return (
         <Layout>
             <section className="w-[775px] h-[900px]">
