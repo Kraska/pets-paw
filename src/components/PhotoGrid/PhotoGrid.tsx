@@ -39,7 +39,7 @@ export const PhotoGrid: React.FC<PhotoGridProps> = ({ className, hoverType = 'ti
     
     return <div className={`PhotoGrid ${className}`}>
         {imgList.map(({ src, title }) => (
-            <div className='PhotoGridItem'>
+            <div className='PhotoGridItem' key={title}>
                 <div className="PhotoGridItemHover">
                     {hoverType === 'title' ?
                         <Badge className='w-full m-2.5 self-end' title={title} /> 
