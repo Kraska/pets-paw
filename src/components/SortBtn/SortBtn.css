@@ -3,12 +3,11 @@
 @tailwind utilities;
 
 @layer components {
-    .SortBtn {
+    button.SortBtn {
         @apply p-2.5 bg-background h-[40px] w-[40px] rounded-md border-2 border-transparent hover:border-pink-light;
     }
 
-    .SortBtn svg {
+    button.SortBtn svg {
         @apply fill-text-light hover:fill-pink;
     }
-
 }
