@@ -9,7 +9,7 @@ import { ReactComponent as Update } from 'assets/icons/update.svg';
 import { ReactComponent as HeartFull } from 'assets/icons/heart-full.svg';
 import './IconBtn.css';
 
-type IconType = 'smile' | 'sad' | 'heart' | 'back' | 'search' | 'close' | 'heart-full' | 'update';
+export type IconType = 'smile' | 'sad' | 'heart' | 'back' | 'search' | 'close' | 'heart-full' | 'update';
 type IconSize = 'sm' | 'md' | 'lg';
 type IconColor = 'white' | 'pink-light' | 'pink' | 'green' | 'yellow';
 
