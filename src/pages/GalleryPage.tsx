@@ -11,7 +11,7 @@ export const GalleryPage: React.FC<GalleryPageProps> = () => {
         <Layout>
             <RightSideLayout>
                 <div className="flex ">
-                    <NavBar className="grow" title='Gallery'/>
+                    <NavBar className="grow" currentTitle='Gallery'/>
                     <UploadButton color='pink-light' />
                 </div>
                 <GalleryToolbar className="my-5" />

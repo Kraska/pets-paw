@@ -1,15 +1,27 @@
-import { IconBtn } from "components/IconBtn/IconBtn";
+import { Badge } from "components/Badge/Badge";
+import { BackButton, Button, PrevButton } from "components/Button/Button";
+import { Link } from "react-router-dom";
+
+type NavBarLinkEntity = {
+    title: string,
+    link: string,
+}
 
 type NavBarProps = {
-    title: string,
+    currentTitle: string,
+    links?: NavBarLinkEntity[],
     className?: string,
 }
 
-export const NavBar: React.FC<NavBarProps> = ({ title, className }) => {
+export const NavBar: React.FC<NavBarProps> = ({ currentTitle, links = [], className }) => {
+
+    const navBarLink = ({ link, title }: NavBarLinkEntity) => 
+    (<Link to={link}><Button color='pink-light' title={title} /></Link>)
+
     return <div className={`${className} flex gap-2`}>
-        <IconBtn type="back" color="pink-light" size='sm' />
-        <div className="bg-pink rounded-md text-white text-lg uppercase px-[30px] py-[5px]">
-            {title}
-        </div>
+        <BackButton color='pink-light' />
+        {links.map((item) => navBarLink(item))}
+        <Badge title={currentTitle} color='pink' />
     </div>
 }
+

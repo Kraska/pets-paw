@@ -9,7 +9,7 @@ export const VotingPage = () => {
     return (
         <Layout>
             <RightSideLayout>
-                <NavBar title='Voiting'/>
+                <NavBar currentTitle='Voiting'/>
                 <Voting className="m-5" />
                 <Log className='mx-5 mt-20' />
             </RightSideLayout>

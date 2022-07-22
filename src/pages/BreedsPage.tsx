@@ -12,7 +12,7 @@ export const BreedsPage: React.FC<BreedsPageProps> = () => {
         <Layout>
             <RightSideLayout>
                 <div className="flex mb-5">
-                    <NavBar title='Breeds'/>
+                    <NavBar currentTitle='Breeds'/>
                     <BreedsToolbar className='grow ml-5' />
                 </div>
                 <PhotoGrid />

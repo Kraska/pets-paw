@@ -9,6 +9,14 @@
     }
 
     .Badge-white {
-        @apply bg-white text-pink hover:bg-pink-light active:bg-pink active:text-white;
+        @apply bg-white text-pink; 
+    }
+
+    .Badge-pink {
+        @apply bg-pink text-white;
+    }
+
+    .Badge-md {
+        @apply h-10;
     }
 }
