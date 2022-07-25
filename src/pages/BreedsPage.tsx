@@ -1,4 +1,5 @@
 import { NavBar } from "components/NavBar/NavBar"
+import { BreedsGreed } from "components/PhotoGrid/BreedsGreed"
 import { PhotoGrid } from "components/PhotoGrid/PhotoGrid"
 import { BreedsToolbar } from "components/ToolBar/BreedsToolbar"
 import { Layout, RightSideLayout } from "./Layout"
@@ -15,7 +16,7 @@ export const BreedsPage: React.FC<BreedsPageProps> = () => {
                     <NavBar currentTitle='Breeds'/>
                     <BreedsToolbar className='grow ml-5' />
                 </div>
-                <PhotoGrid />
+                <BreedsGreed />
             </RightSideLayout>
         </Layout>
     )
