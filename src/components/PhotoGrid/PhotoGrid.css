@@ -8,7 +8,7 @@
     }
 
     .PhotoGridItem img {
-        @apply w-full h-full object-cover rounded-md;
+        @apply w-full h-full object-cover object-center rounded-md;
     }
 
     .PhotoGridItem {

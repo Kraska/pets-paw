@@ -13,40 +13,42 @@ import { IconBtn } from 'components/IconBtn/IconBtn';
 import { Badge } from 'components/Badge/Badge';
 
 type PhotoGridProps = {
+    items?: PhotoGridItem[],
     hoverType?: 'title' | 'heart',
     className?: string,
 }
 
-type ImgEntity = {
-    src: string,
-    title: string,
+type PhotoGridItem = {
+    id: string,
+    url: string,
+    name: string,
 }
 
-const imgList: ImgEntity[] = [
-    { src: Img1, title: 'Img1' },
-    { src: Img2, title: 'Abyssinian' },
-    { src: Img3, title: 'Img3' },
-    { src: Img4, title: 'Img4' },
-    { src: Img5, title: 'Img5' },
-    { src: Img6, title: 'Img6' },
-    { src: Img7, title: 'Img7' },
-    { src: Img8, title: 'Img8' },
-    { src: Img9, title: 'Img9' },
-    { src: Img10, title: 'Img10' },
+const tmpItems: PhotoGridItem[] = [
+    { id: 'Img1', url: Img1, name: 'Img1' },
+    { id: 'Img2', url: Img2, name: 'Abyssinian' },
+    { id: 'Img3', url: Img3, name: 'Img3' },
+    { id: 'Img4', url: Img4, name: 'Img4' },
+    { id: 'Img5', url: Img5, name: 'Img5' },
+    { id: 'Img6', url: Img6, name: 'Img6' },
+    { id: 'Img7', url: Img7, name: 'Img7' },
+    { id: 'Img8', url: Img8, name: 'Img8' },
+    { id: 'Img9', url: Img9, name: 'Img9' },
+    { id: 'Img10', url: Img10, name: 'Img10' },
 ]; 
 
-export const PhotoGrid: React.FC<PhotoGridProps> = ({ className, hoverType = 'title' }) => {
+export const PhotoGrid: React.FC<PhotoGridProps> = ({ items = tmpItems,  className, hoverType = 'title' }) => {
     
     return <div className={`PhotoGrid ${className}`}>
-        {imgList.map(({ src, title }) => (
-            <div className='PhotoGridItem' key={title}>
+        {items.map(({ id, url, name }) => (
+            <div className='PhotoGridItem' key={id}>
                 <div className="PhotoGridItemHover">
                     {hoverType === 'title' ?
-                        <Badge className='w-full m-2.5 self-end' title={title} /> 
+                        <Badge className='w-full m-2.5 self-end' title={name} /> 
                         : <IconBtn size='sm' type='heart' />
                     }
                 </div>
-                <img src={src} alt={title} />
+                <img src={url} alt={name} />
             </div>
         ))}
     </div>

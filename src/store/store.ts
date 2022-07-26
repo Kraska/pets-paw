@@ -1,8 +1,10 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { breedsReducer } from "./reducers/breeds/BreedsSlice";
+import { breedsToolbarReducer } from "./reducers/breeds/toolbar/BreedsToolbarSlice";
 
 const rootReducer = combineReducers({
     breedsReducer,
+    breedsToolbarReducer,
 });
 
 export const setupStore = () => {

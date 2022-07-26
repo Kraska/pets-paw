@@ -1,33 +1,68 @@
 import { SelectInput, SelectInputOption } from "components/SelectInput/SelectInput"
-import { SortBtn } from "components/SortBtn/SortBtn";
+import { SortBtn, SortBtnType, SORT_TYPES } from "components/SortBtn/SortBtn";
+import { useAppDispatch, useAppSelector } from "hooks/redux";
+import { useEffect } from "react";
+import { fetchBreeds } from "store/reducers/breeds/ActionCreators";
+import { setBreed, setLimit, setSort } from "store/reducers/breeds/toolbar/ActionCreators";
 
 type BreedsToolbarProps = {
     className?: string,
 
 }
 
-const breedsOptions: SelectInputOption[] = [
-    { key: 'all', value: 'All breeds' },
-    { key: 'abyssinian', value: 'Abyssinian' },
-    { key: 'aegean', value: 'Aegean' },
-    { key: 'american_bobtail', value: 'American Bobtail' },
-    { key: 'american_curl', value: 'American Curl' },
-    { key: 'american_shorthair', value: 'American Shorthair' },
-    { key: 'american_wirehair', value: 'American Wirehair' },
-];
+const limits = ['5', '10', '15', '20'] as const;
+const limitOptions: SelectInputOption[] = limits
+    .map(key => ({ key, value: `Limit: ${key}` }));
 
-const limitOptions: SelectInputOption[] = [
-    { key: '5', value: 'Limit: 5' },
-    { key: '10', value: 'Limit: 10' },
-    { key: '15', value: 'Limit: 15' },
-    { key: '20', value: 'Limit: 20' },
-];
+export const ALL_BREEDS = 'all';
 
 export const BreedsToolbar: React.FC<BreedsToolbarProps> = ({ className }) => {
+
+    const dispatch = useAppDispatch();
+    const { entities, isLoading } = useAppSelector(state => state.breedsReducer);
+
+    useEffect(() => {
+        dispatch(fetchBreeds());
+    }, []);
+
+    const allBreedsOption = { key: ALL_BREEDS, value: 'All breeds' };
+    const loadingBreedsOption = { key: 'loading', value: 'Loading...', disabled: true };
+
+    const breedsOptions = isLoading ? 
+        [allBreedsOption, loadingBreedsOption] :
+        [allBreedsOption, ...entities.map(({id, name}) => ({ key: id, value: name }))]
+
+
+    const { breed, limit, sort } = useAppSelector(state => state.breedsToolbarReducer)
+
     return <div className={`BreedsToolbar ${className} flex gap-4`}>
-        <SelectInput name='breed' color='grey' className="grow" items={breedsOptions} />
-        <SelectInput name='limit' color='grey' items={limitOptions} />
-        <SortBtn type="up" />
-        <SortBtn type="down" />
+        <SelectInput 
+            name='breed' 
+            color='grey' 
+            className="grow" 
+            items={breedsOptions} 
+            value={breed}
+            onChange={e => dispatch(setBreed(e.target.value))}
+            />
+        <SelectInput 
+            name='limit' 
+            color='grey' 
+            items={limitOptions} 
+            value={limit}
+            onChange={e => dispatch(setLimit(e.target.value as LIMIT))}
+            />
+        <SortBtn 
+            type={SORT_TYPES.up} 
+            isActive={sort === SORT_TYPES.up} 
+            onClick={() => dispatch(setSort(sort === SORT_TYPES.up ? null : SORT_TYPES.up))}
+            />
+        <SortBtn 
+            type={SORT_TYPES.down} 
+            isActive={sort === SORT_TYPES.down} 
+            onClick={() => dispatch(setSort(sort === SORT_TYPES.down ? null : SORT_TYPES.down))}
+            />
     </div>
 }
+
+export type LIMIT = typeof limits[number];
+export type SORT = SortBtnType | null;

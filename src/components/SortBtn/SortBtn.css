@@ -10,4 +10,11 @@
     button.SortBtn svg {
         @apply fill-text-light hover:fill-pink;
     }
+
+    button.SortBtn-active {
+        @apply bg-pink;
+    }
+    button.SortBtn-active svg {
+        @apply fill-white hover:fill-white;
+    }
 }
