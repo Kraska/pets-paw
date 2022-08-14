@@ -11,6 +11,7 @@ import Img9 from 'assets/images/tmp/breeds/image4.png';
 import Img10 from 'assets/images/tmp/breeds/image2.png';
 import { IconBtn } from 'components/IconBtn/IconBtn';
 import { Badge } from 'components/Badge/Badge';
+import { Link } from 'react-router-dom';
 
 type PhotoGridProps = {
     items?: PhotoGridItem[],
@@ -22,6 +23,7 @@ type PhotoGridItem = {
     id: string,
     url: string,
     name: string,
+    link?: string, 
 }
 
 const tmpItems: PhotoGridItem[] = [
@@ -37,19 +39,39 @@ const tmpItems: PhotoGridItem[] = [
     { id: 'Img10', url: Img10, name: 'Img10' },
 ]; 
 
-export const PhotoGrid: React.FC<PhotoGridProps> = ({ items = tmpItems,  className, hoverType = 'title' }) => {
+export const PhotoGrid: React.FC<PhotoGridProps> = ({ 
+    items = tmpItems,  
+    className, 
+    hoverType = 'title' 
+}) => {
     
     return <div className={`PhotoGrid ${className}`}>
-        {items.map(({ id, url, name }) => (
-            <div className='PhotoGridItem' key={id}>
-                <div className="PhotoGridItemHover">
-                    {hoverType === 'title' ?
-                        <Badge className='w-full m-2.5 self-end' title={name} /> 
-                        : <IconBtn size='sm' type='heart' />
-                    }
-                </div>
+        {items.map(item => 
+            (<PhotoGridItem key={item.id} item={item} hoverType={hoverType} />))}
+    </div>
+}
+
+
+type PhotoGridItemProps = {
+    item: PhotoGridItem,
+    hoverType: 'title' | 'heart',
+}
+
+const PhotoGridItem: React.FC<PhotoGridItemProps> = ({ item, hoverType }) => {
+    const { id, url, name, link } = item;
+
+    const hover = (<div className="PhotoGridItemHover">
+            {hoverType === 'title' ?
+                <Badge className='w-full m-2.5 self-end' title={name} /> 
+                : <IconBtn size='sm' type='heart' />
+            }
+        </div>);
+
+    return <div className='PhotoGridItem'>
+                {link ? 
+                    <Link to={link}>{hover}</Link>  
+                    : hover
+                }
                 <img src={url} alt={name} />
             </div>
-        ))}
-    </div>
 }

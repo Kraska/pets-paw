@@ -7,7 +7,6 @@ import { setBreed, setLimit, setSort } from "store/reducers/breeds/toolbar/Actio
 
 type BreedsToolbarProps = {
     className?: string,
-
 }
 
 const limits = ['5', '10', '15', '20'] as const;
@@ -18,11 +17,11 @@ export const ALL_BREEDS = 'all';
 
 export const BreedsToolbar: React.FC<BreedsToolbarProps> = ({ className }) => {
 
-    const dispatch = useAppDispatch();
-    const { entities, isLoading } = useAppSelector(state => state.breedsReducer);
+    const { breedsMap, isLoading } = useAppSelector(state => state.breedsReducer);
 
+    const dispatch = useAppDispatch();
     useEffect(() => {
-        dispatch(fetchBreeds());
+        !breedsMap.length && !isLoading && dispatch(fetchBreeds());
     }, []);
 
     const allBreedsOption = { key: ALL_BREEDS, value: 'All breeds' };
@@ -30,8 +29,10 @@ export const BreedsToolbar: React.FC<BreedsToolbarProps> = ({ className }) => {
 
     const breedsOptions = isLoading ? 
         [allBreedsOption, loadingBreedsOption] :
-        [allBreedsOption, ...entities.map(({id, name}) => ({ key: id, value: name }))]
-
+        [
+            allBreedsOption, 
+            ...Object.values(breedsMap).map(({id, name}) => ({ key: id, value: name }))
+        ];
 
     const { breed, limit, sort } = useAppSelector(state => state.breedsToolbarReducer)
 

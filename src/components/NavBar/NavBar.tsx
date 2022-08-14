@@ -16,12 +16,12 @@ type NavBarProps = {
 export const NavBar: React.FC<NavBarProps> = ({ currentTitle, links = [], className }) => {
 
     const navBarLink = ({ link, title }: NavBarLinkEntity) => 
-    (<Link to={link}><Button color='pink-light' title={title} /></Link>)
+    (<Link key={title} to={link}><Button color='pink-light' title={title} /></Link>)
 
     return <div className={`${className} flex gap-2`}>
-        <BackButton color='pink-light' />
+        <BackButton key="back" color='pink-light' />
         {links.map((item) => navBarLink(item))}
-        <Badge title={currentTitle} color='pink' />
+        <Badge key={currentTitle} title={currentTitle} color='pink' />
     </div>
 }
 

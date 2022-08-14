@@ -3,13 +3,13 @@ import { IBreed } from "models/IBreed"
 
 
 type BreedsSatate = {
-    entities: IBreed[],
+    breedsMap: Record<string, IBreed>,
     isLoading: boolean,
     error: string,
 }
 
 const initialState: BreedsSatate = {
-    entities: [],
+    breedsMap: {},
     isLoading: false,
     error: '',
 }
@@ -21,10 +21,13 @@ export const breedsSlice = createSlice({
         fatching(state) {
             state.isLoading = true;
         },
-        fatchingSuccess(state, action: PayloadAction<IBreed[]>) {
+        fatchingSuccess(
+            state, 
+            action: PayloadAction<Record<string, IBreed>>
+        ) {
             state.isLoading = false;
             state.error = '';
-            state.entities = action.payload;
+            state.breedsMap = action.payload;
         },
         fatchingError(state, action: PayloadAction<string>) {
             state.isLoading = false;

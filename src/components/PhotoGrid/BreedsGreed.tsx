@@ -9,7 +9,7 @@ import { PhotoGrid } from "./PhotoGrid";
 
 export const BreedsGreed: React.FC = () => {
 
-    const { entities, isLoading, error } = useAppSelector(state => state.breedsReducer);
+    const { breedsMap, isLoading, error } = useAppSelector(state => state.breedsReducer);
 
     const { breed, limit, sort } = useAppSelector(state => state.breedsToolbarReducer);
 
@@ -25,19 +25,12 @@ export const BreedsGreed: React.FC = () => {
     // }, []);
     // console.log('entities', entities);
 
-    let items = useMemo(
-        () => entities
-                .map(({ id, name, image }) => 
-                    ({ id, name, url: image && image.url })), 
-        [entities]
-    );
-
     const filteredItems = useMemo(
         () => {
-            if (breed === ALL_BREEDS) return items;
-            return items.filter(({ id }) => id === breed);
+            if (breed === ALL_BREEDS) return Object.values(breedsMap);
+            return Object.values(breedsMap).filter(({ id }) => id === breed);
         }, 
-        [items, breed]
+        [breedsMap, breed]
     );
 
     const sortedItems = useMemo(
@@ -48,15 +41,15 @@ export const BreedsGreed: React.FC = () => {
         [filteredItems, sort]
     );
 
-    const limitedItems = useMemo(
+    const items = useMemo(
         () => sortedItems.slice(0, +limit), 
         [sortedItems, sort, limit]
     );
 
-    console.log('items', limitedItems);
+    //console.log('items', items);
 
     return <>
         {error && <ErrorMsg error={error} />}
-        {isLoading ? <Loader /> : <PhotoGrid items={limitedItems} />}
+        {isLoading ? <Loader /> : <PhotoGrid items={items} />}
     </> 
 }
