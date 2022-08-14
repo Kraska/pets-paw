@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+
+    .BreedInfo img {
+        @apply w-full rounded-lg mt-5;
+    }
+ 
+    .BreedInfo .BreedInfoParams {
+        @apply relative border-2 border-pink-light rounded-lg w-full p-10 grid grid-cols-2 gap-4 mt-12;
+    }
+    
+    .BreedInfo .BreedInfoName {
+        @apply absolute -top-[25px] left-0 right-0 
+            flex justify-center col-span-2 w-fit mx-auto 
+            bg-white text-text text-4xl px-10 py-1;
+    }
+
+    .BreedInfo .BreedInfoParam {
+        @apply text-text-light;
+    }
+
+    .BreedInfo .BreedInfoParam b {
+        @apply text-text font-semibold;
+    }
+
+
+}
