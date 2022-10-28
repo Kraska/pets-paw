@@ -2,11 +2,13 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { breedsReducer } from "./reducers/breeds/BreedsSlice";
 import { breedsToolbarReducer } from "./reducers/breeds/toolbar/BreedsToolbarSlice";
 import { votingReducer } from "./reducers/voting/VotingSlice";
+import { favouritesReducer } from "./reducers/favourites/FavouritesSlice";
 
 const rootReducer = combineReducers({
     breedsReducer,
     breedsToolbarReducer,
-    votingReducer
+    votingReducer,
+    favouritesReducer,
 });
 
 export const setupStore = () => {

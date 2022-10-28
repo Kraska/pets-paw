@@ -4,6 +4,7 @@ import { ReactComponent as Heart } from 'assets/icons/heart.svg';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import { useEffect } from 'react';
 import { fetchVotes } from 'store/reducers/voting/ActionCreators';
+import { fetchFavourites } from 'store/reducers/favourites/ActionCreators';
 
 
 type ActionType = 'like' | 'dislike' | 'favorite' | 
@@ -25,17 +26,30 @@ export const Log: React.FC<LogProps> = ({ className }) => {
 
     const { votes, isLoading, error } = useAppSelector(state => state.votingReducer);
 
+    const { favourites, isLoading: fIsLoading, error: fError } = 
+        useAppSelector(state => state.favouritesReducer);
+
     const dispatch = useAppDispatch();
     useEffect(() => {
         votes === null && !isLoading && dispatch(fetchVotes());
+        favourites === null && !fIsLoading && dispatch(fetchFavourites());
     }, []);
 
-    let logs:ActionEntity[] = !votes ? [] :
-        votes.map<ActionEntity>(({ image_id, created_at, value }) => ({ 
+    const fLogs:ActionEntity[] = !favourites ? [] :
+        favourites.map(({ image_id, created_at }) => ({ 
+            time: new Date(Date.parse(created_at)), 
+            img_id: image_id, 
+            action_type: 'favorite'
+        }));
+
+    const vLogs:ActionEntity[] = !votes ? [] :
+        votes.map(({ image_id, created_at, value }) => ({ 
             time: new Date(Date.parse(created_at)), 
             img_id: image_id, 
             action_type: value ? 'like' : 'dislike'
-        }))
+        }));
+
+    const logs:ActionEntity[] = fLogs.concat(vLogs)    
         .sort((a, b) => b.time.getTime() - a.time.getTime());
 
     // console.log('logs', logs);

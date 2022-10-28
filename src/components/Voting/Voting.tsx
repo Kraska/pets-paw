@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { Loader } from 'components/Loader/Loader';
 import { useAppDispatch } from 'hooks/redux';
 import { addVote } from 'store/reducers/voting/ActionCreators';
+import { addFavourite } from 'store/reducers/favourites/ActionCreators';
 
 
 type VotingProps = {
@@ -44,6 +45,11 @@ export const Voting: React.FC<VotingProps> = ({ className }) => {
         setToogle(!toogle);
     }
 
+    const sendFavourite = () => {
+        dispatch(addFavourite(randomImg!.id));
+        setToogle(!toogle);
+    }
+
     return <div className={`${className} relative mb-[40px]`}>
         {randomImg ? 
             <>
@@ -54,7 +60,7 @@ export const Voting: React.FC<VotingProps> = ({ className }) => {
                     />
                     <IconBtnGroup className='justify-center absolute -bottom-[40px] inset-x-0'>
                     <IconBtn size='lg' type='smile' color='green' onClick={() => sendVote(1)} />
-                    <IconBtn size='lg' type='heart' color='pink' />
+                    <IconBtn size='lg' type='heart' color='pink' onClick={sendFavourite} />
                     <IconBtn size='lg' type='sad' color='yellow' onClick={() => sendVote(0)} />
                 </IconBtnGroup>
             </>
