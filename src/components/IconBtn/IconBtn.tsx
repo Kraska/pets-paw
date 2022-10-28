@@ -1,4 +1,4 @@
-import { ReactElement } from "react"
+import { MouseEventHandler, ReactElement } from "react"
 import { ReactComponent as Smile } from 'assets/icons/smile.svg';
 import { ReactComponent as Sad } from 'assets/icons/sad.svg';
 import { ReactComponent as Heart } from 'assets/icons/heart.svg';
@@ -18,6 +18,7 @@ type IconBtnProps = {
     size?: IconSize,
     color?: IconColor,
     className?: string,
+    onClick?: MouseEventHandler,
 }
 
 const iconMap: Record<IconType, ReactElement> = {
@@ -45,9 +46,20 @@ const colorClassMap: Record<IconColor, string> = {
     yellow: 'IconBtn-yellow',
 }
 
-export const IconBtn: React.FC<IconBtnProps> = ({ type, size = 'md', color = 'white', className }) => {
+export const IconBtn: React.FC<IconBtnProps> = ({ 
+    type, size = 'md', 
+    color = 'white', 
+    className,
+    onClick
+}) => {
     className = `IconBtn ${sizeClassMap[size]} ${colorClassMap[color]} ${className}`;
-    return <button className={className} type="submit">{iconMap[type]}</button>;
+    return <button 
+            className={className}
+            onClick={onClick} 
+            type="submit"
+            >
+                {iconMap[type]}
+            </button>;
 }
 
 

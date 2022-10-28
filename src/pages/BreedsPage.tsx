@@ -1,6 +1,5 @@
 import { NavBar } from "components/NavBar/NavBar"
 import { BreedsGreed } from "components/PhotoGrid/BreedsGreed"
-import { PhotoGrid } from "components/PhotoGrid/PhotoGrid"
 import { BreedsToolbar } from "components/ToolBar/BreedsToolbar"
 import { Layout, RightSideLayout } from "./Layout"
 
