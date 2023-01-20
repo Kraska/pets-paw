@@ -23,9 +23,10 @@ export const fetchFavourites = () => async(dispatch: AppDispatch) => {
 
         // console.log('resp.data', resp.data)
         const data: IFavourite[] = resp.data
-            .map(({ id, image_id, created_at }) => ({ 
+            .map(({ id, image_id, image, created_at }) => ({ 
                 id, 
                 image_id, 
+                image,
                 created_at
             }));
 
