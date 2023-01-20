@@ -22,9 +22,10 @@ export const fetchVotes = () => async(dispatch: AppDispatch) => {
 
         // console.log('resp.data', resp.data)
         const data: IVote[] = resp.data
-            .map(({ id, image_id, created_at, value }) => ({ 
+            .map(({ id, image_id, image, created_at, value }) => ({ 
                 id, 
                 image_id, 
+                image,
                 created_at,
                 value,
             }));

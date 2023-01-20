@@ -19,7 +19,7 @@ type PhotoGridProps = {
     className?: string,
 }
 
-type PhotoGridItem = {
+export type PhotoGridItem = {
     id: string,
     url: string,
     name: string,
@@ -42,7 +42,7 @@ const tmpItems: PhotoGridItem[] = [
 export const PhotoGrid: React.FC<PhotoGridProps> = ({ 
     items = tmpItems,  
     className, 
-    hoverType = 'title' 
+    hoverType 
 }) => {
     
     return <div className={`PhotoGrid ${className}`}>
@@ -54,13 +54,13 @@ export const PhotoGrid: React.FC<PhotoGridProps> = ({
 
 type PhotoGridItemProps = {
     item: PhotoGridItem,
-    hoverType: 'title' | 'heart',
+    hoverType?: 'title' | 'heart',
 }
 
 const PhotoGridItem: React.FC<PhotoGridItemProps> = ({ item, hoverType }) => {
     const { id, url, name, link } = item;
 
-    const hover = (<div className="PhotoGridItemHover">
+    const hover = hoverType && (<div className="PhotoGridItemHover">
             {hoverType === 'title' ?
                 <Badge className='w-full m-2.5 self-end' title={name} /> 
                 : <IconBtn size='sm' type='heart' />

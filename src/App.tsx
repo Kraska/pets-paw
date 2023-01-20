@@ -9,7 +9,7 @@ import { AppRoute } from 'AppRoute';
 import { SearchPage } from 'pages/SearchPage';
 import { FavoritesPage } from 'pages/FavoritesPage';
 import { LikesPage } from 'pages/LikesPage';
-import { DisikesPage } from 'pages/DisikesPage';
+import { DislikesPage } from 'pages/DislikesPage';
 
 
 function App() {
@@ -23,7 +23,7 @@ function App() {
     <Route path={AppRoute.SEARCH} element={<SearchPage />} />
     <Route path={AppRoute.FAVORITES} element={<FavoritesPage />} />
     <Route path={AppRoute.LIKES} element={<LikesPage />} />
-    <Route path={AppRoute.DISLIKES} element={<DisikesPage />} />
+    <Route path={AppRoute.DISLIKES} element={<DislikesPage />} />
   </Routes>
 } 
 

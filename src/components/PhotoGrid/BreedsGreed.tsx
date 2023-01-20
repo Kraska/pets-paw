@@ -50,6 +50,6 @@ export const BreedsGreed: React.FC = () => {
 
     return <>
         {error && <ErrorMsg error={error} />}
-        {isLoading ? <Loader /> : <PhotoGrid items={items} />}
+        {isLoading ? <Loader /> : <PhotoGrid items={items} hoverType="title" />}
     </> 
 }
