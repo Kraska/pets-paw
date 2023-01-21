@@ -62,3 +62,27 @@ export const addFavourite = (image_id: string) => async(dispatch: AppDispatch) =
         dispatch(favouritesSlice.actions.fatchingError((e as AxiosError).message))
     }
 };
+
+export const deleteFavourite = (id: string) => async(dispatch: AppDispatch) => {
+
+    try {
+
+        const resp = await axios.delete(
+            "https://api.thecatapi.com/v1/favourites/" + id,
+            {
+                headers: { 
+                    "Content-Type": "application/json",
+                    "x-api-key": AppConfig.CAT_API_KEY
+                }
+            }
+        );
+        
+        resp.data && 
+        resp.data.message && 
+        resp.data.message == 'SUCCESS' &&
+        dispatch(favouritesSlice.actions.deleteFavourite(id));
+
+    } catch(e) {
+        dispatch(favouritesSlice.actions.fatchingError((e as AxiosError).message))
+    }
+};

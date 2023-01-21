@@ -15,7 +15,7 @@ export const GalleryPage: React.FC<GalleryPageProps> = () => {
                     <UploadButton color='pink-light' />
                 </div>
                 <GalleryToolbar className="my-5" />
-                <PhotoGrid hoverType="heart" />
+                <PhotoGrid />
             </RightSideLayout>
         </Layout>
     )

@@ -34,8 +34,11 @@ export const favouritesSlice = createSlice({
             state.error = action.payload;
         },
         addFavourite(state, action: PayloadAction<IFavourite>) {
-            state.favourites = state.favourites || []
-            state.favourites.push(action.payload);
+            state.favourites = [...(state.favourites || []), action.payload];
+        },
+        deleteFavourite(state, action: PayloadAction<string>) {
+            state.favourites = [...(state.favourites ||[])]
+                .filter(item => item.id != action.payload);
         }
     }
 })
