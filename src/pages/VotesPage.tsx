@@ -35,7 +35,7 @@ export const VotesPage: React.FC<VotesPageProps> = ( { type, title } ) => {
         <Layout>
             <RightSideLayout>
                 <NavBar className="mb-5" currentTitle={title} />
-                <PhotoGrid items={likes} />
+                <PhotoGrid items={likes} hoverGen={() => <></>} />
             </RightSideLayout>
         </Layout>
     )

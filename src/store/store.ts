@@ -3,12 +3,14 @@ import { breedsReducer } from "./reducers/breeds/BreedsSlice";
 import { breedsToolbarReducer } from "./reducers/breeds/toolbar/BreedsToolbarSlice";
 import { votingReducer } from "./reducers/voting/VotingSlice";
 import { favouritesReducer } from "./reducers/favourites/FavouritesSlice";
+import { imagesReducer } from "./reducers/images/ImagesSlice";
 
 const rootReducer = combineReducers({
     breedsReducer,
     breedsToolbarReducer,
     votingReducer,
     favouritesReducer,
+    imagesReducer,
 });
 
 export const setupStore = () => {
