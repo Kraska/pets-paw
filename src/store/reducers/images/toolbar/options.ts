@@ -18,15 +18,9 @@ const getOptions = (obj: FilterOptions) => {
     .map(({key, value}) => ({ key, value}));
 }
 
-export const breedsOptions: SelectInputOption[] = [
-    { key: 'all', value: 'All breeds' },
-    { key: 'abyssinian', value: 'Abyssinian' },
-    { key: 'aegean', value: 'Aegean' },
-    { key: 'american_bobtail', value: 'American Bobtail' },
-    { key: 'american_curl', value: 'American Curl' },
-    { key: 'american_shorthair', value: 'American Shorthair' },
-    { key: 'american_wirehair', value: 'American Wirehair' },
-];
+export const GALLERY_ALL_BREEDS = { key: 'all', value: 'All breeds' };
+
+
 
 
 const galleryLimits: FilterOptions = {

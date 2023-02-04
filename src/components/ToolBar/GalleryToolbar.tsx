@@ -1,15 +1,17 @@
 import { IconBtn } from "components/IconBtn/IconBtn";
-import { SelectInput } from "components/SelectInput/SelectInput"
+import { SelectInput, SelectInputOption } from "components/SelectInput/SelectInput"
 import { useAppDispatch, useAppSelector } from "hooks/redux";
+import { useEffect } from "react";
+import { fetchBreeds } from "store/reducers/breeds/ActionCreators";
 import { setBreed, setLimit, setOrder, setType } from "store/reducers/images/toolbar/ActionCreators";
 import { 
-    breedsOptions, 
     GALLERY_TYPES_OPTIONS, 
     GalleryType,
     GalleryOrder,
     GalleryLimit,
     GALLERY_ORDERS_OPTIONS,
-    GALLERY_LIMITS_OPTIONS
+    GALLERY_LIMITS_OPTIONS,
+    GALLERY_ALL_BREEDS
 } from "store/reducers/images/toolbar/options";
 
 
@@ -23,6 +25,16 @@ export const GalleryToolbar: React.FC<GalleryToolbarProps> = ({ className }) => 
 
     const { order, type, breed, limit } = useAppSelector(state => state.galleryToolbarReducer);
     const dispatch = useAppDispatch();
+
+    const { breedsMap, isLoading, error } = useAppSelector(state => state.breedsReducer);
+    useEffect(() => {
+        !breedsMap.length && !isLoading && dispatch(fetchBreeds());
+    }, []);
+
+    const breedsList = Object.values(breedsMap)
+        .map(({ id, name }) => ({ key: id, value: name }));
+        
+    const breedsOptions = [GALLERY_ALL_BREEDS, ...breedsList];
 
     return <div className={`${className} grid grid-cols-2 gap-4 bg-background rounded-lg p-2.5`}>
         <SelectInput 

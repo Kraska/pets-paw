@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { 
-    breedsOptions, 
     GALLERY_ORDERS_OPTIONS,
     GALLERY_TYPES_OPTIONS, 
     GALLERY_LIMITS_OPTIONS, 
     GalleryType,
     GalleryOrder,
-    GalleryLimit
+    GalleryLimit,
+    GALLERY_ALL_BREEDS
 } from "./options";
 
 
@@ -20,7 +20,7 @@ type gallereyToolbarSatate = {
 const initialState: gallereyToolbarSatate = {
     order: GALLERY_ORDERS_OPTIONS[0].key,
     type: GALLERY_TYPES_OPTIONS[0].key,
-    breed: breedsOptions[0].key,
+    breed: GALLERY_ALL_BREEDS.key,
     limit: GALLERY_LIMITS_OPTIONS[0].key,
 }
 
