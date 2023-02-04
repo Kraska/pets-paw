@@ -4,9 +4,12 @@ import { useAppDispatch, useAppSelector } from "hooks/redux";
 import { setBreed, setLimit, setOrder, setType } from "store/reducers/images/toolbar/ActionCreators";
 import { 
     breedsOptions, 
-    limitOptions, 
-    orderOptions, 
-    typeOptions 
+    GALLERY_TYPES_OPTIONS, 
+    GalleryType,
+    GalleryOrder,
+    GalleryLimit,
+    GALLERY_ORDERS_OPTIONS,
+    GALLERY_LIMITS_OPTIONS
 } from "store/reducers/images/toolbar/options";
 
 
@@ -26,17 +29,17 @@ export const GalleryToolbar: React.FC<GalleryToolbarProps> = ({ className }) => 
             label="ORDER" 
             name='order' 
             color='white' 
-            items={orderOptions} 
+            items={GALLERY_ORDERS_OPTIONS} 
             value={order}
-            onChange={e => dispatch(setOrder(e.target.value))}
+            onChange={e => dispatch(setOrder(e.target.value as GalleryOrder))}
             />
         <SelectInput 
             label="TYPE" 
             name='type' 
             color='white' 
-            items={typeOptions} 
+            items={GALLERY_TYPES_OPTIONS} 
             value={type}
-            onChange={e => dispatch(setType(e.target.value))}
+            onChange={e => dispatch(setType(e.target.value as GalleryType))}
             />
         <SelectInput 
             label="BREED" 
@@ -52,9 +55,9 @@ export const GalleryToolbar: React.FC<GalleryToolbarProps> = ({ className }) => 
                 className="grow" 
                 name='limit' 
                 color='white' 
-                items={limitOptions} 
+                items={GALLERY_LIMITS_OPTIONS} 
                 value={limit}
-                onChange={e => dispatch(setLimit(e.target.value))}    
+                onChange={e => dispatch(setLimit(e.target.value as GalleryLimit))}    
                 />
             <IconBtn className="self-end" type="update" size="sm" />
         </div>
@@ -62,5 +65,3 @@ export const GalleryToolbar: React.FC<GalleryToolbarProps> = ({ className }) => 
 }
 
 
-// const types = typeOptions.map(({ key }) => key);
-// const TYPES = typeof types;

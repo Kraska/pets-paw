@@ -3,9 +3,16 @@ import { AppConfig } from "config";
 import { IImage } from "models/IImage";
 import { AppDispatch } from "../../store";
 import { imagesSlice } from "./ImagesSlice"; 
+import { GalleryLimit, GalleryOrder, GalleryType } from "./toolbar/options";
 
-export const fetchImages = () => async(dispatch: AppDispatch) => {
+export const fetchImages = (
+    order: GalleryOrder, 
+    type: GalleryType, 
+    breed: string, 
+    limit: GalleryLimit
+) => async(dispatch: AppDispatch) => {
 
+    
     try {
         // console.log('fetchImages')
         dispatch(imagesSlice.actions.fatching())
@@ -19,8 +26,10 @@ export const fetchImages = () => async(dispatch: AppDispatch) => {
                 params: { 
                     sub_id: AppConfig.CAT_API_USER_ID,
                     size: 'small',
-                    limit: 10,
-                    page: 0 
+                    limit: limit,
+                    page: 0,
+                    mime_types: type,
+                    order: order
                 } 
             }
         );
