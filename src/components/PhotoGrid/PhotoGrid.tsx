@@ -28,7 +28,7 @@ export const PhotoGrid: React.FC<PhotoGridProps> = ({
     return <div className={`PhotoGrid ${className}`}>
         {items.map(item => 
             (<PhotoGridItem 
-                key={item.id} 
+                key={`${item.id}_${Math.random()}`} 
                 item={item} 
                 hoverGen={hoverGen}
                 />))}

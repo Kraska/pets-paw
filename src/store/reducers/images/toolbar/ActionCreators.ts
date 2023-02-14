@@ -14,3 +14,6 @@ export const setBreed = (breed: string) => async(dispatch: AppDispatch) => {
 export const setLimit = (limit: GalleryLimit) => async(dispatch: AppDispatch) => {
     dispatch(galleryToolbarSlice.actions.limit(limit))
 };
+export const increasePage = () => async(dispatch: AppDispatch) => {
+    dispatch(galleryToolbarSlice.actions.pageIncrease())
+};

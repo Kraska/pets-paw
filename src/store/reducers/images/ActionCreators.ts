@@ -3,22 +3,23 @@ import { AppConfig } from "config";
 import { IImage } from "models/IImage";
 import { AppDispatch } from "../../store";
 import { imagesSlice } from "./ImagesSlice"; 
-import { GalleryLimit, GalleryOrder, GalleryType, GALLERY_ALL_BREEDS } from "./toolbar/options";
+import { GALLERY_ALL_BREEDS } from "./toolbar/options";
 
 export const fetchImages = (
-    order: GalleryOrder, 
-    type: GalleryType, 
+    order: string, 
+    type: string, 
     breed: string, 
-    limit: GalleryLimit
+    limit: number,
+    page: number
 ) => async(dispatch: AppDispatch) => {
 
     let params: Record<string, string|number> = { 
         sub_id: AppConfig.CAT_API_USER_ID,
         size: 'small',
-        limit: limit,
-        page: 0,
         mime_types: type,
         order: order,
+        limit: limit,
+        page
     }; 
 
     params = (breed == GALLERY_ALL_BREEDS.key) ? 
@@ -47,7 +48,13 @@ export const fetchImages = (
                 categories
             }));
 
-        dispatch(imagesSlice.actions.fatchingSuccess(data));
+        const action = page == 0 ? 
+            imagesSlice.actions.setImages(data) :
+            imagesSlice.actions.addImages(data);
+
+        dispatch(action);
+        data.length < limit && dispatch(imagesSlice.actions.allLoaded());
+
     } catch(e) {
         dispatch(imagesSlice.actions.fatchingError((e as AxiosError).message))
     }
