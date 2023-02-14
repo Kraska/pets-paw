@@ -27,7 +27,8 @@ export const VotesPage: React.FC<VotesPageProps> = ( { type, title } ) => {
             id: image_id, 
             name: image_id, 
             url: image!.url,
-        }));
+        }))
+        .reverse();
 
 // console.log(likes);
 

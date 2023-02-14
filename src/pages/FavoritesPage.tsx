@@ -21,7 +21,8 @@ export const FavoritesPage: React.FC = () => {
             id: id!.toString(), 
             name: image_id, 
             url: image!.url,
-        }));
+        }))
+        .reverse();
 
     const deleteFromFavorites = (item: PhotoGridItem) => {
         dispatch(deleteFavourite(item.id));
