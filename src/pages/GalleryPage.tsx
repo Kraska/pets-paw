@@ -1,11 +1,12 @@
 import { UploadButton } from "components/Button/Button";
+import { IconBtn } from "components/IconBtn/IconBtn";
 import { LazyLoader } from "components/Loader/LazyLoader";
 import { NavBar } from "components/NavBar/NavBar";
-import { getBtnHoverGen, PhotoGrid, PhotoGridItem } from "components/PhotoGrid/PhotoGrid";
+import { PhotoGrid, PhotoGridItem } from "components/PhotoGrid/PhotoGrid";
 import { GalleryToolbar } from "components/ToolBar/GalleryToolbar";
 import { useAppDispatch, useAppSelector } from "hooks/redux";
 import { useEffect } from "react";
-import { addFavourite } from "store/reducers/favourites/ActionCreators";
+import { addFavourite, deleteFavourite, fetchFavourites } from "store/reducers/favourites/ActionCreators";
 import { fetchImages } from "store/reducers/images/ActionCreators";
 import { increasePage } from "store/reducers/images/toolbar/ActionCreators";
 import { GALLERY_LIMITS, GALLERY_ORDERS, GALLERY_TYPES } from "store/reducers/images/toolbar/options";
@@ -14,11 +15,24 @@ import { Layout, RightSideLayout } from "./Layout";
 type GalleryPageProps = {}
 
 export const GalleryPage: React.FC<GalleryPageProps> = () => {
-
-    const { images, allLoaded, isLoading, error } = useAppSelector(state => state.imagesReducer);
     const dispatch = useAppDispatch();
 
-    const { order, type, breed, limit, page } = useAppSelector(state => state.galleryToolbarReducer);
+    const { images, allLoaded, isLoading, error } = 
+    useAppSelector(state => state.imagesReducer);
+
+    const { order, type, breed, limit, page } = 
+    useAppSelector(state => state.galleryToolbarReducer);
+
+    const { favourites, isLoading: isLoadingFauvorites } = 
+    useAppSelector(state => state.favouritesReducer);
+
+    const favouritesIds = favourites ? 
+        favourites.map(i => i.image_id) :
+        [];
+
+    useEffect(() => {
+        favourites === null && !isLoadingFauvorites && dispatch(fetchFavourites())
+    }, []);
 
     const loadNext = () => {
         dispatch(increasePage());
@@ -41,7 +55,24 @@ export const GalleryPage: React.FC<GalleryPageProps> = () => {
 
 
     const addToFavorites = (item: PhotoGridItem) => {
+        favouritesIds.push(item.id)
         dispatch(addFavourite(item.id))
+    }
+
+    const removeFromFavorites = (item: PhotoGridItem) => {
+        favouritesIds.filter(id => id != item.id)
+        const favourite = favourites?.find(({ image_id }) => image_id == item.id)
+        favourite && favourite.id && dispatch(deleteFavourite(favourite.id))
+    }
+
+    const btnHoverGen = (item: PhotoGridItem) => {
+        const isFauvarite = favouritesIds.includes(item.id);
+        const type = isFauvarite ? 'heart-full' : 'heart';
+        const callback = isFauvarite ? removeFromFavorites : addToFavorites;
+
+        return <div className="PhotoGridItemHover">
+            <IconBtn size='sm' color='white' type={type} onClick={e => callback(item)} />
+        </div>;
     }
 
     return (
@@ -54,7 +85,7 @@ export const GalleryPage: React.FC<GalleryPageProps> = () => {
                 <GalleryToolbar className="my-5" />
                 <PhotoGrid 
                     items={items} 
-                    hoverGen={getBtnHoverGen('heart', 'white', addToFavorites)}
+                    hoverGen={btnHoverGen}
                     />
                 <LazyLoader loadNext={loadNext} isFinish={allLoaded} />
             </RightSideLayout>

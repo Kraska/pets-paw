@@ -56,7 +56,11 @@ export const addFavourite = (image_id: string) => async(dispatch: AppDispatch) =
         resp.data && 
         resp.data.message && 
         resp.data.message == 'SUCCESS' &&
-        dispatch(favouritesSlice.actions.addFavourite({ ...favorite, created_at: new Date().toISOString()}));
+        dispatch(favouritesSlice.actions.addFavourite({ 
+            id: resp.data.id,
+            ...favorite, 
+            created_at: new Date().toISOString()
+        }));
 
     } catch(e) {
         dispatch(favouritesSlice.actions.fatchingError((e as AxiosError).message))
