@@ -1,24 +1,27 @@
 import axios, { AxiosError } from "axios";
 import { AppConfig } from "config";
 import { IFavourite } from "models/IFavourite";
-import { IVote } from "models/IVote";
 import { AppDispatch } from "../../store";
 import { favouritesSlice } from "./FavouritesSlice"; 
+
+
+const headers = { 
+    "Content-Type": "application/json",
+    "x-api-key": AppConfig.CAT_API_KEY
+};
+
+const params = { 
+    sub_id: AppConfig.CAT_API_USER_ID 
+};
 
 export const fetchFavourites = () => async(dispatch: AppDispatch) => {
 
     try {
         // console.log('fetchFavorites')
         dispatch(favouritesSlice.actions.fatching())
-        const resp = await axios.get<IVote[]>(
+        const resp = await axios.get<IFavourite[]>(
             "https://api.thecatapi.com/v1/favourites", 
-            {
-                headers: { 
-                    "Content-Type": "application/json",
-                    "x-api-key": AppConfig.CAT_API_KEY
-                },
-                params: { sub_id: AppConfig.CAT_API_USER_ID } 
-            }
+            { headers, params }
         );
 
         // console.log('resp.data', resp.data)
@@ -45,26 +48,39 @@ export const addFavourite = (image_id: string) => async(dispatch: AppDispatch) =
         const resp = await axios.post(
             "https://api.thecatapi.com/v1/favourites",
             favorite, 
-            {
-                headers: { 
-                    "Content-Type": "application/json",
-                    "x-api-key": AppConfig.CAT_API_KEY
-                }
-            }
+            { headers }
         );
         
-        resp.data && 
-        resp.data.message && 
-        resp.data.message == 'SUCCESS' &&
-        dispatch(favouritesSlice.actions.addFavourite({ 
-            id: resp.data.id,
-            ...favorite, 
-            created_at: new Date().toISOString()
-        }));
+        if (
+            resp.data && 
+            resp.data.message && 
+            resp.data.message == 'SUCCESS'
+        ) {
+            const favourite = await getFavorite(resp.data.id);
+            dispatch(favouritesSlice.actions.addFavourite(favourite));
+        }
 
     } catch(e) {
-        dispatch(favouritesSlice.actions.fatchingError((e as AxiosError).message))
+        // todo log
+        throw e; 
     }
+};
+
+const getFavorite = async(id: string) => {
+
+    const resp = await axios.get<IFavourite>(
+        `https://api.thecatapi.com/v1/favourites/${id}`, 
+        { headers, params }
+    );
+
+    const { 
+        id: itemId, 
+        image_id, 
+        image,
+        created_at
+    } = resp.data;
+
+    return { id: itemId, image_id, image, created_at };
 };
 
 export const deleteFavourite = (id: string) => async(dispatch: AppDispatch) => {
@@ -73,12 +89,7 @@ export const deleteFavourite = (id: string) => async(dispatch: AppDispatch) => {
 
         const resp = await axios.delete(
             "https://api.thecatapi.com/v1/favourites/" + id,
-            {
-                headers: { 
-                    "Content-Type": "application/json",
-                    "x-api-key": AppConfig.CAT_API_KEY
-                }
-            }
+            { headers }
         );
         
         resp.data && 
@@ -87,6 +98,7 @@ export const deleteFavourite = (id: string) => async(dispatch: AppDispatch) => {
         dispatch(favouritesSlice.actions.deleteFavourite(id));
 
     } catch(e) {
-        dispatch(favouritesSlice.actions.fatchingError((e as AxiosError).message))
+        // todo log
+        throw e; 
     }
 };
