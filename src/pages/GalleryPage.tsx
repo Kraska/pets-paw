@@ -5,7 +5,7 @@ import { NavBar } from "components/NavBar/NavBar";
 import { PhotoGrid, PhotoGridItem } from "components/PhotoGrid/PhotoGrid";
 import { GalleryToolbar } from "components/ToolBar/GalleryToolbar";
 import { useAppDispatch, useAppSelector } from "hooks/redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { addFavourite, deleteFavourite, fetchFavourites } from "store/reducers/favourites/ActionCreators";
 import { fetchImages } from "store/reducers/images/ActionCreators";
 import { increasePage } from "store/reducers/images/toolbar/ActionCreators";
@@ -66,13 +66,13 @@ export const GalleryPage: React.FC<GalleryPageProps> = () => {
     }
 
     const btnHoverGen = (item: PhotoGridItem) => {
-        const isFauvarite = favouritesIds.includes(item.id);
-        const type = isFauvarite ? 'heart-full' : 'heart';
-        const callback = isFauvarite ? removeFromFavorites : addToFavorites;
+        const isFavourite = favouritesIds.includes(item.id);
 
-        return <div className="PhotoGridItemHover">
-            <IconBtn size='sm' color='white' type={type} onClick={e => callback(item)} />
-        </div>;
+        return <Hover 
+            isFavourite={isFavourite} 
+            add={() => removeFromFavorites(item)} 
+            remove={() => addToFavorites(item)} 
+            />
     }
 
     return (
@@ -91,4 +91,40 @@ export const GalleryPage: React.FC<GalleryPageProps> = () => {
             </RightSideLayout>
         </Layout>
     )
+}
+
+type HoverProps = {
+    isFavourite: boolean,
+    add: () => void,
+    remove: () => void,
+}
+
+const Hover: React.FC<HoverProps> = ({ isFavourite, add, remove }) => {
+
+    const type = isFavourite ? 'heart-full' : 'heart';
+
+    const [ loading, setLoading ] = useState(false);
+    const [ prevValue, setPrevValue ] = useState<null|boolean>(null);
+
+    loading && 
+    prevValue !== isFavourite &&
+    setLoading(false)
+
+    const callback = () => {
+        setLoading(true);
+        setPrevValue(isFavourite);
+        isFavourite ? add() : remove();
+    };
+
+    return <div className="PhotoGridItemHover">
+        {loading ? 
+            <Loader /> :
+            <IconBtn size='sm' color='white' type={type} onClick={callback} />
+        }
+    </div>;
+}
+
+
+const Loader: React.FC<{}> = () => {
+    return <div>loading...</div>
 }
