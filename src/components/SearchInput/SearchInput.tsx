@@ -1,20 +1,34 @@
 import './SearchInput.css';
 import { IconBtn } from 'components/IconBtn/IconBtn';
+import { useState } from 'react';
 
 type SearchInputProps = {
-    value: string,
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void, 
+    initValue: string,
+    onSearch: (text: string) => void,
     plaseholder?: string,
     className?: string,
 }
 
 export const SearchInput: React.FC<SearchInputProps> = ({ 
-    value, 
-    onChange,
+    initValue, 
+    onSearch,
     plaseholder = 'Search...', 
     className 
 }) => {
-    return <form className={`SearchInput ${className}`}>
+
+
+    const [value, setValue] = useState(initValue);
+
+    const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setValue(e.target.value);
+    }
+
+    const onSubmit = (e: React.FormEvent<Element>) => {
+        e.preventDefault();
+        onSearch(value);
+    }
+
+    return <form className={`SearchInput ${className}`} onSubmit={onSubmit}>
         <div className="relative">
             <input 
                 value={value}

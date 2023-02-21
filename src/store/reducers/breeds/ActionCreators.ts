@@ -8,7 +8,7 @@ import { breedsSlice } from "./BreedsSlice";
 export const fetchBreeds = () => async(dispatch: AppDispatch) => {
 
     try {
-        console.log('fetchBreeds')
+        // console.log('fetchBreeds')
         dispatch(breedsSlice.actions.fatching())
         const resp = await axios.get<IApiBreed[]>(
             "https://api.thecatapi.com/v1/breeds", //attach_breed=abys
