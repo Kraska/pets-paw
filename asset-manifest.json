@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/pets-paw/static/css/main.c7453f54.css",
-    "main.js": "/pets-paw/static/js/main.bdfd4e9e.js",
+    "main.js": "/pets-paw/static/js/main.f5fede8e.js",
     "static/media/girl-and-pet 1.png": "/pets-paw/static/media/girl-and-pet 1.1927e13f60069098098c.png",
     "static/media/images-search.png": "/pets-paw/static/media/images-search.635d5775a4e3f1f33a8f.png",
     "static/media/vote-table.png": "/pets-paw/static/media/vote-table.6b3949f3d3f0301d95e3.png",
@@ -21,10 +21,10 @@
     "static/media/close.svg": "/pets-paw/static/media/close.5b978b55fba2e27662ca719f9c65bfaf.svg",
     "static/media/upload.svg": "/pets-paw/static/media/upload.02bf6edce1b4d09f9d72693a401a0fb1.svg",
     "main.c7453f54.css.map": "/pets-paw/static/css/main.c7453f54.css.map",
-    "main.bdfd4e9e.js.map": "/pets-paw/static/js/main.bdfd4e9e.js.map"
+    "main.f5fede8e.js.map": "/pets-paw/static/js/main.f5fede8e.js.map"
   },
   "entrypoints": [
     "static/css/main.c7453f54.css",
-    "static/js/main.bdfd4e9e.js"
+    "static/js/main.f5fede8e.js"
   ]
 }
